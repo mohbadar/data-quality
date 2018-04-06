@@ -1,10 +1,10 @@
 #!/bin/sh
-DQ_LIB_VERSION=5.0.0
+DQ_LIB_VERSION=5.0.2 # change the version of DQ libs to upload
 
 NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
 NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"
 
-NEXUS_LINK_FOR_DOWNLOAD=${NEXUS_RELEASE_LINK}
+NEXUS_LINK_FOR_DOWNLOAD=${NEXUS_RELEASE_LINK} # Switch between RELEASE/SNAPSHOT link here
 
 TALEND_UPDATE_LINK="https://talend-update.talend.com/nexus/content/repositories/libraries/"
 
