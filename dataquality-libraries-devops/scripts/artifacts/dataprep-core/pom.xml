@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.talend.libraries</groupId>
-	<artifactId>dataquality-common-6.1.2</artifactId>
+	<artifactId>dataprep-core-1.0.4</artifactId>
 	<version>6.0.0</version>
 	<packaging>jar</packaging>
-	<name>dataquality-common</name>
-	<description>Abstractions of data analysis, and low-level utilities such as East Asian text pattern recognition</description>
-	<url>https://github.com/Talend/data-quality</url>
+	<name>dataprep-core</name>
+	<description>dataprep-core</description>
+	<url>https://github.com/Talend/data-prep-core</url>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>

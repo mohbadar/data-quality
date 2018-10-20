@@ -40,7 +40,7 @@ do
         sed -i '' -e 's/<artifactId>'${element}'<\/artifactId>/<artifactId>'${element}'-'${DATAPREP_CORE_VERSION}'<\/artifactId>/g' \
           ./artifacts/${element}/pom.xml
 
-       upload to talend-update
+      # upload to talend-update
       mvn deploy:deploy-file \
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \

@@ -1,5 +1,5 @@
 #!/bin/sh
-DAIKON_VERSION=0.23.0
+DAIKON_VERSION=0.26.1
 
 NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
 NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"
@@ -27,7 +27,7 @@ do
         -Ddest=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar
 
         # prepare pom.xml file
-        sed -i '' -e 's/<artifactId>'${element}'<\/artifactId>/<artifactId>'${element}'-'${DAIKON_VERSION}'<\/artifactId>/g' \
+        sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DAIKON_VERSION}'<\/artifactId>/g' \
           ./artifacts/${element}/pom.xml
 
 	# upload to talend-update

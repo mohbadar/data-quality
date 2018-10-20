@@ -1,5 +1,5 @@
 #!/bin/sh
-DQ_LIB_VERSION=5.0.2 # change the version of DQ libs to upload
+DQ_LIB_VERSION=6.1.2 # change the version of DQ libs to upload
 
 NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
 NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"
@@ -41,7 +41,7 @@ do
         -Ddest=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar
 
   # prepare pom.xml file
-  sed -i '' -e 's/<artifactId>'${element}'<\/artifactId>/<artifactId>'${element}'-'${DQ_LIB_VERSION}'<\/artifactId>/g' \
+  sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DQ_LIB_VERSION}'<\/artifactId>/g' \
     ./artifacts/${element}/pom.xml
 
 
