@@ -1,5 +1,5 @@
 #!/bin/sh
-DAIKON_VERSION=0.26.1
+DAIKON_VERSION=0.27.0
 
 NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
 NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"

@@ -1,5 +1,5 @@
 #!/bin/sh
-DQ_LIB_VERSION=6.1.2 # change the version of DQ libs to upload
+DQ_LIB_VERSION=6.1.3 # change the version of DQ libs to upload
 
 NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
 NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"

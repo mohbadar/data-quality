@@ -1,5 +1,5 @@
 #!/bin/sh
-DATAPREP_CORE_VERSION=1.0.4
+DATAPREP_CORE_VERSION=1.0.5
 
 NEXUS_ENTERPRISE_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/releases/"
 NEXUS_ENTERPRISE_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/snapshots/"
