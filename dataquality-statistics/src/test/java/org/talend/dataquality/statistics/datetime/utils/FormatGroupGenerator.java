@@ -144,9 +144,9 @@ public class FormatGroupGenerator {
             List<DateTimeFormatCode> formatCodeSet = formatGroupMap.get(aggreratedCode);
             if (formatCodeSet == null) {
                 formatCodeSet = new ArrayList<DateTimeFormatCode>();
+                formatGroupMap.put(aggreratedCode, formatCodeSet);
             }
             formatCodeSet.add(fc);
-            formatGroupMap.put(aggreratedCode, formatCodeSet);
         }
 
         StringBuilder sb = new StringBuilder();

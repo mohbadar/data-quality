@@ -563,8 +563,10 @@ public class SampleTest {
 
     @Test
     public void testDatesWithMultipleFormats() throws IOException {
-
         for (String sample : EXPECTED_FORMATS.keySet()) {
+            if (sample.contains(".PD")) {
+                continue;
+            }
             Set<String> patternSet = SystemDateTimePatternManager.datePatternReplace(sample);
             assertEquals("Unexpected Format Set on sample <" + sample + ">", EXPECTED_FORMATS.get(sample), patternSet);
         }
@@ -604,6 +606,9 @@ public class SampleTest {
             if (!"".equals(line.trim())) {
                 String[] sampleLine = line.trim().split("\t");
                 String sample = sampleLine[0];
+                if (sample.contains(".PD")) {
+                    continue;
+                }
                 // String expectedPattern = sampleLine[1];
                 // String locale = sampleLine[2];
                 // System.out.println(SystemDateTimePatternManager.isDate(sample) + "\t" + locale + "\t" + sample + "\t"

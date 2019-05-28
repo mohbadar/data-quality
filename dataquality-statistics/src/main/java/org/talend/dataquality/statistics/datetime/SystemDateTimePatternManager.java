@@ -14,7 +14,6 @@ package org.talend.dataquality.statistics.datetime;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -55,6 +54,10 @@ import org.talend.dataquality.statistics.type.SortedList;
 public class SystemDateTimePatternManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SystemDateTimePatternManager.class);
+
+    public static final String[] ISO_LANGUAGE_LIST = new String[] { "ar", "be", "bg", "ca", "cs", "da", "de", "el", "en", "es",
+            "et", "fi", "fr", "ga", "iw", "hr", "hu", "in", "in", "is", "it", "iw", "ja", "ko", "lt", "lv", "mk", "ms", "mt",
+            "nb", "nl", "nn", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sr", "sv", "th", "tr", "uk", "vi", "zh" };
 
     private static final List<Map<Pattern, String>> DATE_PATTERN_GROUP_LIST = new ArrayList<>();
 
@@ -142,9 +145,10 @@ public class SystemDateTimePatternManager {
         for (String lang : new String[] { "en", "fr", "de", "it", "es", "ja", "zh" }) {
             locales.add(Locale.forLanguageTag(lang));
         }
-        for (Locale locale : DateFormat.getAvailableLocales()) {
+        for (String lang : ISO_LANGUAGE_LIST) {
+            Locale locale = Locale.forLanguageTag(lang);
             if (StringUtils.isNotEmpty(locale.getLanguage())) {
-                locales.add(Locale.forLanguageTag(locale.getLanguage()));
+                locales.add(locale);
             }
         }
         return locales;
@@ -467,6 +471,7 @@ public class SystemDateTimePatternManager {
 
     /**
      * validate a pattern with all existing locales
+     * 
      * @param value to validate
      * @param pattern to use (for example dd/MM/yy)
      * @param matcher the regex matcher
@@ -491,6 +496,7 @@ public class SystemDateTimePatternManager {
 
     /**
      * find the set of locales from a pattern matcher and the list of words
+     * 
      * @param wordToLocalList
      * @param matcher
      * @return the set of locales
@@ -498,22 +504,22 @@ public class SystemDateTimePatternManager {
     private static Set<Locale> findLocales(List<Map<String, Set<Locale>>> wordToLocalList, Matcher matcher) {
         int groupIndex = 1;
         Set<Locale> locales = new HashSet<>();
-        //we iterate over all matcher groups
+        // we iterate over all matcher groups
         while (groupIndex <= matcher.groupCount()) {
             Set<Locale> tmpLocales = null;
             String group = matcher.group(groupIndex++).toLowerCase();
             // for each group, we search for the right map of words
             for (Map<String, Set<Locale>> wordToLocal : wordToLocalList) {
                 tmpLocales = wordToLocal.get(group);
-                if (tmpLocales != null) { //found
+                if (tmpLocales != null) { // found
                     if (CollectionUtils.isEmpty(locales))
                         locales = tmpLocales;
                     else
-                        locales.retainAll(tmpLocales); //we do the intersection between the sets "locales" and "tmpLocales"
-                    break; //we don't have to iterate anymore
+                        locales.retainAll(tmpLocales); // we do the intersection between the sets "locales" and "tmpLocales"
+                    break; // we don't have to iterate anymore
                 }
             }
-            if (CollectionUtils.isEmpty(tmpLocales) || CollectionUtils.isEmpty(locales)) //group not found
+            if (CollectionUtils.isEmpty(tmpLocales) || CollectionUtils.isEmpty(locales)) // group not found
                 return Collections.emptySet();
         }
         return locales;
@@ -521,6 +527,7 @@ public class SystemDateTimePatternManager {
 
     /**
      * find the date time formatter is the pattern matches with the specified local
+     * 
      * @param value
      * @param pattern
      * @param locale

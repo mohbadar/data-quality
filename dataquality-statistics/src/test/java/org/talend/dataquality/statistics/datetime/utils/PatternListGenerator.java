@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -132,6 +133,7 @@ public class PatternListGenerator {
             add(new LocaledPattern("dd/MMM/yy h:mm a", Locale.US, "OTHER", true)); // data time pattern from jira
             add(new LocaledPattern("yyyy/M/d", Locale.US, "OTHER", false)); // TDQ-13539
             add(new LocaledPattern("MM/dd/yyyy hh:mm:ss a", Locale.US, "OTHER", true)); // TDQ-11557
+
         }
     };
 
@@ -193,8 +195,19 @@ public class PatternListGenerator {
             return;
         }
 
+        Set<String> localesInShortStyleWithYYYY = new HashSet<String>(
+                Arrays.asList("el", "fi", "hr", "hu", "is", "mt", "pt", "ro", "sk", "sv", "th", "tr", "vi"));
+
         if (!pattern.contains("yy") && pattern.contains("y")) {// only one "y" to represent year part
-            return;
+            if (FormatStyle.SHORT.equals(dateStyle) && !localesInShortStyleWithYYYY.contains(locale.toLanguageTag())) {
+                pattern = pattern.replace("y", "yy");
+            } else {
+                pattern = pattern.replace("y", "yyyy");
+            }
+        }
+
+        if (pattern.contains("\u200F")) {
+            pattern = pattern.replace("\u200F", "");
         }
 
         if (!knownPatternList.contains(pattern)) {
@@ -215,9 +228,7 @@ public class PatternListGenerator {
                 if (PRINT_DETAILED_RESULTS) {
                     System.out.println(lp);
                 }
-
             }
-
         }
     }
 
@@ -227,7 +238,7 @@ public class PatternListGenerator {
             if (PRINT_DETAILED_RESULTS) {
                 System.out.println("--------------------Date Style: " + style + "-----------------------");
             }
-            for (String lang : Locale.getISOLanguages()) {
+            for (String lang : SystemDateTimePatternManager.ISO_LANGUAGE_LIST) {
                 getFormatByStyle(style, style, true, false, new Locale(lang), false);// Date Only
             }
         }
@@ -235,7 +246,7 @@ public class PatternListGenerator {
             if (PRINT_DETAILED_RESULTS) {
                 System.out.println("--------------------DateTime Style: " + style + "-----------------------");
             }
-            for (String lang : Locale.getISOLanguages()) {
+            for (String lang : SystemDateTimePatternManager.ISO_LANGUAGE_LIST) {
                 getFormatByStyle(style, style, true, true, new Locale(lang), false);// DateTime
             }
         }

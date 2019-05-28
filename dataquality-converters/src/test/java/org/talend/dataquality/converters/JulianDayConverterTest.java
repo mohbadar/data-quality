@@ -13,6 +13,7 @@
 package org.talend.dataquality.converters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.time.chrono.HijrahChronology;
 import java.time.chrono.IsoChronology;
@@ -35,7 +36,11 @@ public class JulianDayConverterTest {
         try {
             JapaneseEra.valueOf("Reiwa");
         } catch (IllegalArgumentException e) {
-            return false;
+            try {
+                JapaneseEra.valueOf("NewEra");
+            } catch (IllegalArgumentException e2) {
+                return false;
+            }
         }
         return true;
     }
@@ -328,7 +333,8 @@ public class JulianDayConverterTest {
 
         jc = new JulianDayConverter(JulianFields.MODIFIED_JULIAN_DAY, IsoChronology.INSTANCE, "dd/LLL/yyyy", //$NON-NLS-1$
                 Locale.CHINESE);
-        assertEquals("18/五月/2017", jc.convert(modiJulianDay)); //$NON-NLS-1$
+        final String convertedJulianDate = jc.convert(modiJulianDay);
+        assertTrue("18/五月/2017".equals(convertedJulianDate) || "18/5月/2017".equals(convertedJulianDate)); //$NON-NLS-1$
 
         jc = new JulianDayConverter(JapaneseChronology.INSTANCE, null, Locale.US, JulianFields.MODIFIED_JULIAN_DAY);
         if (isReiwaEraSupported()) {

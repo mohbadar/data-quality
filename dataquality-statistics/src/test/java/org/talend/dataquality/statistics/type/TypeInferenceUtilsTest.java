@@ -21,9 +21,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -219,8 +217,8 @@ public class TypeInferenceUtilsTest {
 
     @Test
     public void testIsJapaneseDateddMMMyyyy() {
-        assertTrue(TypeInferenceUtils.isDate("22-五月-1999"));
-        assertFalse(TypeInferenceUtils.isDate("22-明天-1999"));
+        assertTrue(TypeInferenceUtils.isDate("22 5月 1999"));
+        assertFalse(TypeInferenceUtils.isDate("22 18月 1999"));
     }
 
     private List<String> loadData(String path) throws IOException {
