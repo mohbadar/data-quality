@@ -1,10 +1,10 @@
 package org.talend.dataquality.common.pattern;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.talend.daikon.pattern.character.CharPattern;
 
@@ -111,7 +111,8 @@ public class TextPatternUtil {
     }
 
     public static Set<CharPattern> getCharPatterns(List<Integer> codePoints, List<Integer> filteredCodepoints) {
-        Set<CharPattern> charPatternSet = new LinkedHashSet<>();
+        Set<CharPattern> charPatternSet = new TreeSet<>();
+
         for (Integer codepoint : codePoints) {
             CharPattern charPattern = getCharPattern(codepoint);
             if (charPattern != null) {
