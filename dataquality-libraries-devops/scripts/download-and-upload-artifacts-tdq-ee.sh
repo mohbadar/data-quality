@@ -1,18 +1,16 @@
 #!/bin/sh
 DQ_LIB_VERSION=7.0.0 # change the version of DQ libs to upload
 
-NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceRelease/"
-NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/TalendOpenSourceSnapshot/"
+NEXUS_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/releases/"
+NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/snapshots/"
 
 NEXUS_LINK_FOR_DOWNLOAD=${NEXUS_RELEASE_LINK} # Switch between RELEASE/SNAPSHOT link here
 
 TALEND_UPDATE_LINK="https://talend-update.talend.com/nexus/content/repositories/libraries/"
 
-ARTIFACT_NAMES="dataquality-common \
- dataquality-converters \
- dataquality-record-linkage \
- dataquality-standardization \
- dataquality-statistics"
+ARTIFACT_NAMES="dataquality-datamasking \
+ dataquality-semantic \
+ dataquality-semantic-model"
 
 # download parent pom from TalendOpenSourceRelease repo
 mvn dependency:get \

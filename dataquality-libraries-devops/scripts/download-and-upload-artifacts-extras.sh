@@ -1,14 +1,12 @@
 #!/bin/sh
 TALEND_UPDATE_LINK="https://talend-update.talend.com/nexus/content/repositories/libraries/"
 
-ARTIFACT_NAMES="carrier-1.85 \
- geocoder-2.95 \
- httpclient-4.5.1 \
- httpcore-4.4.3 \
- libphonenumber-8.9.6 \
- lucene-misc-4.10.4 \
- lucene-suggest-4.10.4 \
- prefixmapper-2.95"
+ARTIFACT_NAMES="carrier-1.101 \
+ geocoder-2.111 \
+ httpclient-4.5.6 \
+ httpcore-4.4.10 \
+ libphonenumber-8.10.5 \
+ prefixmapper-2.111"
 
 
 for element in ${ARTIFACT_NAMES}    

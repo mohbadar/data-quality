@@ -1,5 +1,5 @@
 #!/bin/sh
-DATAPREP_CORE_VERSION=1.0.5
+DATAPREP_CORE_VERSION=1.2.26
 
 NEXUS_ENTERPRISE_RELEASE_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/releases/"
 NEXUS_ENTERPRISE_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/snapshots/"
@@ -35,9 +35,9 @@ do
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \
         -DpomFile=./artifacts/${element}/pom.xml \
-        -DgroupId=org.talend.libraries \
-        -DartifactId=${element}-${DATAPREP_CORE_VERSION} \
-        -Dversion=6.0.0 \
+        -DgroupId=org.talend.dataprep \
+        -DartifactId=${element} \
+        -Dversion=${DATAPREP_CORE_VERSION} \
         -Dpackaging=jar \
         -Dfile=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar 
 done
