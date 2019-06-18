@@ -13,12 +13,12 @@ ARTIFACT_NAMES="daikon \
 
 for element in ${ARTIFACT_NAMES}    
 do
-	echo "-------------------------------------" 
-	echo "|     " ${element} "    |" 
-	echo "-------------------------------------" 
+    echo "-------------------------------------"
+    echo "|     " ${element} "    |"
+    echo "-------------------------------------"
 
-	# download from artifacts-zl
-	mvn dependency:get \
+    # download from artifacts-zl
+    mvn dependency:get \
         -DrepoUrl=${NEXUS_RELEASE_LINK} \
         -DgroupId=org.talend.daikon \
         -DartifactId=${element} \
@@ -26,17 +26,19 @@ do
         -Dpackaging=jar \
         -Ddest=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar
 
-        # prepare pom.xml file
-        sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DAIKON_VERSION}'<\/artifactId>/g' \
-          ./artifacts/${element}/pom.xml
+    # prepare pom.xml file
+    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DAIKON_VERSION}'<\/artifactId>/g' \
+      ./artifacts/${element}/pom.xml
+    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+      ./artifacts/${element}/pom.xml
 
-	# upload to talend-update
-	mvn deploy:deploy-file \
+    # upload to talend-update
+    mvn deploy:deploy-file \
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \
         -DgroupId=org.talend.libraries \
         -DartifactId=${element}-${DAIKON_VERSION} \
         -Dversion=6.0.0 \
         -DpomFile=./artifacts/${element}/pom.xml \
-        -Dfile=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar 
+        -Dfile=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar
 done

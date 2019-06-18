@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.talend.libraries</groupId>
-	<artifactId>httpcore-4.4.3</artifactId>
+	<artifactId>httpcore-4.4.10</artifactId>
 	<version>6.0.0</version>
 	<packaging>jar</packaging>
 	<name>Apache HttpCore</name>

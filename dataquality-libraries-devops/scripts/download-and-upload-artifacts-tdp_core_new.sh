@@ -12,32 +12,34 @@ ARTIFACT_NAMES="dataprep-core  dataprep-core-actions  dataprep-actions-parser"
 
 for element in ${ARTIFACT_NAMES}    
 do   
-      echo "-------------------------------------" 
-      echo "|     " ${element} "    |" 
-      echo "-------------------------------------" 
+    echo "-------------------------------------"
+    echo "|     " ${element} "    |"
+    echo "-------------------------------------"
 
-      # download from artifacts-zl
-      mvn dependency:get \
-        -DrepoUrl=${DATAPREP_DOWNLOAD_LINK} \
-        -DremoteRepositories=releases::default::${DATAPREP_DOWNLOAD_LINK} \
-        -DgroupId=org.talend.dataprep \
-        -DartifactId=${element} \
-        -Dversion=${DATAPREP_CORE_VERSION} \
-        -Dpackaging=jar \
-        -Ddest=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar
+    # download from artifacts-zl
+    mvn dependency:get \
+      -DrepoUrl=${DATAPREP_DOWNLOAD_LINK} \
+      -DremoteRepositories=releases::default::${DATAPREP_DOWNLOAD_LINK} \
+      -DgroupId=org.talend.dataprep \
+      -DartifactId=${element} \
+      -Dversion=${DATAPREP_CORE_VERSION} \
+      -Dpackaging=jar \
+      -Ddest=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar
 
-      # prepare pom.xml file
-        sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DATAPREP_CORE_VERSION}'<\/artifactId>/g' \
-          ./artifacts/${element}/pom.xml
+    # prepare pom.xml file
+    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DATAPREP_CORE_VERSION}'<\/artifactId>/g' \
+      ./artifacts/${element}/pom.xml
+    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+      ./artifacts/${element}/pom.xml
 
-      # upload to talend-update
-      mvn deploy:deploy-file \
-        -Durl=${TALEND_UPDATE_LINK} \
-        -DrepositoryId=talend-update \
-        -DpomFile=./artifacts/${element}/pom.xml \
-        -DgroupId=org.talend.dataprep \
-        -DartifactId=${element} \
-        -Dversion=${DATAPREP_CORE_VERSION} \
-        -Dpackaging=jar \
-        -Dfile=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar 
+    # upload to talend-update
+    mvn deploy:deploy-file \
+      -Durl=${TALEND_UPDATE_LINK} \
+      -DrepositoryId=talend-update \
+      -DpomFile=./artifacts/${element}/pom.xml \
+      -DgroupId=org.talend.libraries \
+      -DartifactId=${element}-${DATAPREP_CORE_VERSION} \
+      -Dversion=6.0.0 \
+      -Dpackaging=jar \
+      -Dfile=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar
 done

@@ -14,22 +14,15 @@ ARTIFACT_NAMES="dataquality-common \
  dataquality-standardization \
  dataquality-statistics"
 
-# download parent pom from TalendOpenSourceRelease repo
-mvn dependency:get \
-      -DrepoUrl=${NEXUS_RELEASE_LINK} \
-      -DgroupId=org.talend.dataquality \
-      -DartifactId=dataquality-parent \
-      -Dversion=${DQ_LIB_VERSION} \
-      -Dpackaging=pom
 
 for element in ${ARTIFACT_NAMES}    
 do   
-	echo "-------------------------------------" 
-	echo "|     " ${element} "    |" 
-	echo "-------------------------------------" 
+    echo "-------------------------------------"
+    echo "|     " ${element} "    |"
+    echo "-------------------------------------"
 
-	# download from artifacts-zl
-	mvn dependency:get \
+    # download from artifacts-zl
+    mvn dependency:get \
         -DrepoUrl=${NEXUS_LINK_FOR_DOWNLOAD} \
         -DgroupId=org.talend.dataquality \
         -DartifactId=${element} \
@@ -37,18 +30,19 @@ do
         -Dpackaging=jar \
         -Ddest=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar
 
-  # prepare pom.xml file
-  sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DQ_LIB_VERSION}'<\/artifactId>/g' \
-    ./artifacts/${element}/pom.xml
+    # prepare pom.xml file
+    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DQ_LIB_VERSION}'<\/artifactId>/g' \
+      ./artifacts/${element}/pom.xml
+    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+      ./artifacts/${element}/pom.xml
 
-
-	# upload to talend-update
-	mvn deploy:deploy-file \
+    # upload to talend-update
+    mvn deploy:deploy-file \
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \
-        -DgroupId=org.talend.dataquality \
-        -DartifactId=${element} \
-        -Dversion=${DQ_LIB_VERSION} \
+        -DgroupId=org.talend.libraries \
+        -DartifactId=${element}-${DQ_LIB_VERSION} \
+        -Dversion=6.0.0 \
         -DpomFile=./artifacts/${element}/pom.xml \
-        -Dfile=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar 
+        -Dfile=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar
 done
