@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.talend.dataquality</groupId>
-	<artifactId>dataquality-converters</artifactId>
-	<version>7.0.0</version>
+	<groupId>org.talend.daikon</groupId>
+	<artifactId>daikon-exception</artifactId>
+	<version>0.31.7</version>
 	<packaging>jar</packaging>
-	<name>dataquality-converters</name>
-	<description>API for various types of convert functions</description>
-	<url>https://github.com/Talend/data-quality</url>
+	<name>daikon-exception</name>
+	<description>Talend Daikon Exception Library</description>
+	<url>https://github.com/Talend/daikon</url>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>

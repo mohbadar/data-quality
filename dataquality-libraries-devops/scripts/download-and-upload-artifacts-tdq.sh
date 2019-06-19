@@ -31,18 +31,18 @@ do
         -Ddest=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar
 
     # prepare pom.xml file
-    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DQ_LIB_VERSION}'<\/artifactId>/g' \
+    sed -i '' -e 's/<artifactId>'${element}'.*<\/artifactId>/<artifactId>'${element}'<\/artifactId>/g' \
       ./artifacts/${element}/pom.xml
-    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+    sed -i '' -e 's/<version>.*<\/version>/<version>'${DQ_LIB_VERSION}'<\/version>/g' \
       ./artifacts/${element}/pom.xml
 
     # upload to talend-update
     mvn deploy:deploy-file \
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \
-        -DgroupId=org.talend.libraries \
-        -DartifactId=${element}-${DQ_LIB_VERSION} \
-        -Dversion=6.0.0 \
+        -DgroupId=org.talend.dataquality \
+        -DartifactId=${element} \
+        -Dversion=${DQ_LIB_VERSION} \
         -DpomFile=./artifacts/${element}/pom.xml \
         -Dfile=./artifacts/${element}/${element}-${DQ_LIB_VERSION}.jar
 done

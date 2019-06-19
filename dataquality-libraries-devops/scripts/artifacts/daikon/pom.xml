@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.talend.daikon</groupId>
-	<artifactId>daikon-0.31.7</artifactId>
-	<version>6.0.0</version>
+	<artifactId>daikon</artifactId>
+	<version>0.31.7</version>
 	<packaging>jar</packaging>
 	<name>daikon</name>
 	<description>Talend Daikon Library</description>

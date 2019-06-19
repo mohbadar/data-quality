@@ -7,6 +7,7 @@ NEXUS_SNAPSHOT_LINK="https://artifacts-zl.talend.com/nexus/content/repositories/
 TALEND_UPDATE_LINK="https://talend-update.talend.com/nexus/content/repositories/libraries/"
 
 ARTIFACT_NAMES="daikon \
+ daikon-exception \
  daikon-tql-core \
  multitenant-core"
 
@@ -27,18 +28,18 @@ do
         -Ddest=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar
 
     # prepare pom.xml file
-    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DAIKON_VERSION}'<\/artifactId>/g' \
+    sed -i '' -e 's/<artifactId>'${element}'.*<\/artifactId>/<artifactId>'${element}'<\/artifactId>/g' \
       ./artifacts/${element}/pom.xml
-    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+    sed -i '' -e 's/<version>.*<\/version>/<version>'${DAIKON_VERSION}'<\/version>/g' \
       ./artifacts/${element}/pom.xml
 
     # upload to talend-update
     mvn deploy:deploy-file \
         -Durl=${TALEND_UPDATE_LINK} \
         -DrepositoryId=talend-update \
-        -DgroupId=org.talend.libraries \
-        -DartifactId=${element}-${DAIKON_VERSION} \
-        -Dversion=6.0.0 \
+        -DgroupId=org.talend.daikon \
+        -DartifactId=${element} \
+        -Dversion=${DAIKON_VERSION} \
         -DpomFile=./artifacts/${element}/pom.xml \
         -Dfile=./artifacts/${element}/${element}-${DAIKON_VERSION}.jar
 done

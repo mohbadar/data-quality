@@ -27,9 +27,9 @@ do
       -Ddest=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar
 
     # prepare pom.xml file
-    sed -i '' -e 's/<artifactId>'${element}'-.*<\/artifactId>/<artifactId>'${element}'-'${DATAPREP_CORE_VERSION}'<\/artifactId>/g' \
+    sed -i '' -e 's/<artifactId>'${element}'.*<\/artifactId>/<artifactId>'${element}'<\/artifactId>/g' \
       ./artifacts/${element}/pom.xml
-    sed -i '' -e 's/<version>.*<\/version>/<version>6.0.0<\/version>/g' \
+    sed -i '' -e 's/<version>.*<\/version>/<version>'${DATAPREP_CORE_VERSION}'<\/version>/g' \
       ./artifacts/${element}/pom.xml
 
     # upload to talend-update
@@ -37,9 +37,8 @@ do
       -Durl=${TALEND_UPDATE_LINK} \
       -DrepositoryId=talend-update \
       -DpomFile=./artifacts/${element}/pom.xml \
-      -DgroupId=org.talend.libraries \
-      -DartifactId=${element}-${DATAPREP_CORE_VERSION} \
-      -Dversion=6.0.0 \
-      -Dpackaging=jar \
+      -DgroupId=org.talend.dataprep \
+      -DartifactId=${element} \
+      -Dversion=${DATAPREP_CORE_VERSION} \
       -Dfile=./artifacts/${element}/${element}-${DATAPREP_CORE_VERSION}.jar
 done
