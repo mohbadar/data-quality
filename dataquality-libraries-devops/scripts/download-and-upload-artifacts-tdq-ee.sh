@@ -10,7 +10,10 @@ TALEND_UPDATE_LINK="https://talend-update.talend.com/nexus/content/repositories/
 
 ARTIFACT_NAMES="dataquality-datamasking \
  dataquality-semantic \
- dataquality-semantic-model"
+ dataquality-semantic-model \
+ dataquality-magicfill \
+ dataquality-parsing \
+ dataquality-parsing-fullname"
 
 
 for element in ${ARTIFACT_NAMES}    
