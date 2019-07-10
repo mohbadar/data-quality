@@ -94,4 +94,24 @@ public class TextLengthAnalyzerTest {
         // Avg
         Assert.assertEquals(2.75, stats.getAvgTextLength(), 0);
     }
+
+    @Test
+    public void testAnalyzeOnlyNull() {
+        String[] data = new String[] { null };
+        for (String value : data) {
+            analyzer.analyze(value);
+        }
+
+        TextLengthStatistics stats = analyzer.getResult().get(0);
+        // Min
+        Assert.assertEquals(0, stats.getMinTextLength(), 0);
+        Assert.assertEquals(0, stats.getMinTextLengthIgnoreBlank(), 0);
+        // Max
+        Assert.assertEquals(0, stats.getMaxTextLength(), 0);
+        Assert.assertEquals(0, stats.getMaxTextLengthIgnoreBlank(), 0);
+        // Avg
+        Assert.assertNull(stats.getAvgTextLength());
+        Assert.assertEquals(0, stats.getAvgTextLengthIgnoreBlank(), 0);
+    }
+
 }
